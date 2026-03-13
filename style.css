@@ -1,0 +1,122 @@
+﻿:root {
+    color-scheme: light;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(160deg, #eff6ff 0%, #dbeafe 100%);
+    color: #0f172a;
+}
+
+.game-shell {
+    width: min(92vw, 460px);
+    padding: 24px;
+    border-radius: 24px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.16);
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.game-header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.game-subtitle {
+    margin: 6px 0 0;
+    color: #475569;
+    font-size: 14px;
+}
+
+.reset-button {
+    border: none;
+    border-radius: 999px;
+    padding: 12px 18px;
+    background-color: #2563eb;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.reset-button:hover {
+    background-color: #1d4ed8;
+}
+
+.scoreboard {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 16px;
+    border-radius: 16px;
+    background-color: #f8fafc;
+}
+
+.scoreboard p {
+    margin: 0;
+}
+
+#message {
+    color: #1d4ed8;
+    font-weight: 600;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.tile {
+    aspect-ratio: 1;
+    border: 2px solid #4b5563;
+    border-radius: 12px;
+    background-color: #cbd5e1;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(28px, 7vw, 32px);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.tile:hover {
+    transform: translateY(-2px);
+}
+
+.tile.flipped {
+    background-color: #fef3c7;
+}
+
+.tile.matched {
+    background-color: #86efac;
+    cursor: default;
+}
+
+@media (max-width: 520px) {
+    .game-shell {
+        padding: 18px;
+    }
+
+    .game-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .reset-button {
+        width: 100%;
+    }
+}

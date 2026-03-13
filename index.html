@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Puzzle</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <main class="game-shell">
+        <header class="game-header">
+            <div>
+                <h1>Memory Puzzle</h1>
+                <p class="game-subtitle">そろえて最速クリアを目指そう</p>
+            </div>
+            <button id="reset-button" class="reset-button" type="button">リセット</button>
+        </header>
+
+        <section class="scoreboard" aria-label="スコア情報">
+            <p>タイム: <span id="timer">00.0</span>秒</p>
+            <p>ベスト: <span id="best-time">--</span></p>
+            <p>達成日時: <span id="best-time-date">--</span></p>
+            <p id="message">1枚めくるとタイマーが始まります。</p>
+        </section>
+
+        <div id="game-board" aria-label="ゲームボード"></div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
