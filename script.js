@@ -5,7 +5,16 @@ const bestTimeDisplay = document.getElementById('best-time');
 const bestTimeDateDisplay = document.getElementById('best-time-date');
 const messageDisplay = document.getElementById('message');
 
-const symbols = ['🍎', '🍌', '🍇', '🍒', '🍉', '🍓', '🍍', '🥝'];
+const panelImages = [
+    'jpg/mit_001.jpg',
+    'jpg/mit_002.jpg',
+    'jpg/mit_003.jpg',
+    'jpg/mit_004.jpg',
+    'jpg/mit_005.jpg',
+    'jpg/mit_006.jpg',
+    'jpg/mit_007.jpg',
+    'jpg/mit_008.jpg',
+];
 const bestTimeStorageKey = 'memory-puzzle-best-time-ms';
 const bestTimeDateStorageKey = 'memory-puzzle-best-time-achieved-at';
 const legacyBestScoreStorageKey = 'memory-puzzle-best-score';
@@ -39,15 +48,26 @@ function resetGame() {
 
     board.replaceChildren();
 
-    const deck = shuffle([...symbols, ...symbols]);
-    deck.forEach((symbol) => {
+    const deck = shuffle([...panelImages, ...panelImages]);
+    deck.forEach((imagePath, index) => {
         const tile = document.createElement('button');
         tile.className = 'tile';
         tile.type = 'button';
-        tile.textContent = '?';
-        tile.dataset.symbol = symbol;
+        tile.dataset.symbol = imagePath;
         tile.setAttribute('aria-label', '伏せられたタイル');
         tile.addEventListener('click', () => flipTile(tile));
+
+        const tileImage = document.createElement('img');
+        tileImage.className = 'tile-image';
+        tileImage.src = imagePath;
+        tileImage.alt = `パネル画像 ${index + 1}`;
+        tile.appendChild(tileImage);
+
+        const tileCover = document.createElement('span');
+        tileCover.className = 'tile-cover';
+        tileCover.textContent = '?';
+        tile.appendChild(tileCover);
+
         board.appendChild(tile);
     });
 }
@@ -67,7 +87,7 @@ function flipTile(tile) {
 
     if (!firstTile) {
         firstTile = tile;
-        messageDisplay.textContent = '同じ絵文字のタイルを探してください。';
+        messageDisplay.textContent = '同じ画像のタイルを探してください。';
         return;
     }
 
@@ -77,7 +97,7 @@ function flipTile(tile) {
         matchedPairs += 1;
         firstTile = null;
 
-        if (matchedPairs === symbols.length) {
+        if (matchedPairs === panelImages.length) {
             finishGame();
         } else {
             messageDisplay.textContent = 'ナイス！ この調子です。';
@@ -117,13 +137,11 @@ function finishGame() {
 
 function revealTile(tile) {
     tile.classList.add('flipped');
-    tile.textContent = tile.dataset.symbol;
-    tile.setAttribute('aria-label', `タイル ${tile.dataset.symbol}`);
+    tile.setAttribute('aria-label', '画像タイル');
 }
 
 function hideTile(tile) {
     tile.classList.remove('flipped');
-    tile.textContent = '?';
     tile.setAttribute('aria-label', '伏せられたタイル');
 }
 
